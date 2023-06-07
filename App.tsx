@@ -1,20 +1,27 @@
 import React from 'react';
-import {SafeAreaView} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import Contacts from './components/Contacts';
+import ContactsInfo from './components/ContactsInfo';
 
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-import ContactList from './components/ContactList';
-import SearchInput from './components/Search';
+const Stack = createNativeStackNavigator();
 
 function App(): JSX.Element {
-  const backgroundStyle = {
-    backgroundColor: Colors.lighter,
-  };
-
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <SearchInput onSearch={() => {}} />
-      <ContactList />
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName={'Contacts'}>
+        <Stack.Screen
+          name="Contacts"
+          component={Contacts}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ContactInfo"
+          component={ContactsInfo}
+          options={{headerTitle: ''}}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 

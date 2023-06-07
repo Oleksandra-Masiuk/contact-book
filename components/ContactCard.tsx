@@ -1,11 +1,15 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import IconInfo from 'react-native-vector-icons/Feather';
+import { Color } from '../constants/colors';
+import { FontSize } from '../constants/fontSize';
 
 interface Contact {
   name: string;
   email?: string;
+  phonenumber?: string;
 }
 
 interface ContactCardProps {
@@ -14,20 +18,26 @@ interface ContactCardProps {
 
 const ContactCard: React.FC<ContactCardProps> = ({item}) => {
   const {name, email} = item;
+  const navigation = useNavigation();
   return (
-    <View style={styles.cardWrapper}>
-      <Icon
-        style={styles.icon}
-        name="perm-contact-cal"
-        size={30}
-        color="#606060"
-      />
-      <View style={styles.textWrapper}>
-        <Text style={styles.name}>{name}</Text>
-        {email && <Text style={styles.email}>{email}</Text>}
+    <TouchableOpacity
+      onPress={() => {
+        navigation.navigate('ContactInfo', {item});
+      }}>
+      <View style={styles.cardWrapper}>
+        <Icon
+          style={styles.icon}
+          name="perm-contact-cal"
+          size={30}
+          color={Color.MEDIUM_GREY}
+        />
+        <View style={styles.textWrapper}>
+          <Text style={styles.name}>{name}</Text>
+          {email && <Text style={styles.email}>{email}</Text>}
+        </View>
+        <IconInfo name="info" size={16} color={Color.MEDIUM_GREY} />
       </View>
-      <IconInfo name="info" size={16} color="#606060" />
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -36,16 +46,16 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingLeft: 20,
     flexDirection: 'row',
-    backgroundColor: '#e7e9f4',
+    backgroundColor: Color.BACKGROUND_GREY,
     alignItems: 'center',
   },
   name: {
-    color: '#444547',
-    fontSize: 18,
+    color: Color.DARK_GREY,
+    fontSize: FontSize.BIG,
     fontWeight: 'bold',
   },
   email: {
-    color: '#85878b',
+    color: Color.LIGHT_GREY,
     fontSize: 14,
     marginTop: 2,
   },
