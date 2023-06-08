@@ -5,6 +5,7 @@ import {IconEntypo} from '../../constants/icons';
 import {styles as contactInfoStyles} from '../../styles/contactInfo';
 import {Color} from '../../constants/colors';
 import {styles} from '../../styles/contactModal';
+import {AddContactsForm} from './AddContactsForm';
 
 interface AddContactsModalProps {
   modalVisible: boolean;
@@ -26,9 +27,8 @@ const AddContactsModal: React.FC<AddContactsModalProps> = ({
           style={[contactInfoStyles.button, styles.buttonClose]}
           onPress={onClose}>
           <IconEntypo name="cross" size={22} color={Color.SMALL_GREY} />
-          <Text style={contactInfoStyles.buttonText}>CLOSE</Text>
         </TouchableOpacity>
-        <Text>Hello World!</Text>
+        <AddContactsForm />
       </View>
     </Modal>
   );
