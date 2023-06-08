@@ -21,6 +21,11 @@ const styles = StyleSheet.create({
     gap: 6,
     marginLeft: 'auto',
   },
+  noContactsText: {
+    alignSelf: 'center',
+    fontSize: FontSize.BIG,
+    color: Color.DARK_GREY,
+  },
 });
 
 export {styles};

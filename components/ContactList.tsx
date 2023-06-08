@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, View} from 'react-native';
+import {FlatList, Text, View} from 'react-native';
 import ContactCard from './ContactCard';
 import {styles} from '../styles/cardList';
 import {Contact} from '../interfaces/Contact';
@@ -14,14 +14,22 @@ function Divider(): JSX.Element {
 
 const ContactList: React.FC<ContactListProps> = ({data}) => {
   return (
-    <View>
-      <FlatList
-        style={styles.cardList}
-        data={data}
-        renderItem={({item}) => <ContactCard item={item} />}
-        ItemSeparatorComponent={Divider}
-      />
-    </View>
+    <>
+      {data?.length > 0 ? (
+        <View>
+          <FlatList
+            style={styles.cardList}
+            data={data}
+            renderItem={({item}) => <ContactCard item={item} />}
+            ItemSeparatorComponent={Divider}
+          />
+        </View>
+      ) : (
+        <View>
+          <Text style={styles?.noContactsText}>No contacts found</Text>
+        </View>
+      )}
+    </>
   );
 };
 
