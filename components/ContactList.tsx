@@ -1,6 +1,7 @@
 import React from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
+import {FlatList, View} from 'react-native';
 import ContactCard from './ContactCard';
+import {styles} from '../styles/cardList';
 
 function Divider(): JSX.Element {
   return <View style={styles.divider} />;
@@ -80,12 +81,5 @@ function ContactList(): JSX.Element {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  cardList: {
-    gap: 20,
-  },
-  divider: {height: 15},
-});
 
 export default ContactList;

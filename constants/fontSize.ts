@@ -1,7 +1,7 @@
 const FontSize = {
-  SMALL: 12,
-  MEDIUM: 14,
-  BIG: 18,
+  SMALL: 14,
+  MEDIUM: 18,
+  BIG: 22,
 };
 
 export {FontSize};

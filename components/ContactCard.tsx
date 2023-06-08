@@ -29,13 +29,13 @@ const ContactCard: React.FC<ContactCardProps> = ({item}) => {
           style={styles.icon}
           name="perm-contact-cal"
           size={30}
-          color={Color.MEDIUM_GREY}
+          color={Color.LIGHT_GREY}
         />
         <View style={styles.textWrapper}>
           <Text style={styles.name}>{name}</Text>
           {email && <Text style={styles.email}>{email}</Text>}
         </View>
-        <IconInfo name="info" size={16} color={Color.MEDIUM_GREY} />
+        <IconInfo name="info" size={16} color={Color.LIGHT_GREY} />
       </View>
     </TouchableOpacity>
   );
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   },
   name: {
     color: Color.DARK_GREY,
-    fontSize: FontSize.BIG,
+    fontSize: FontSize.MEDIUM,
     fontWeight: 'bold',
   },
   email: {

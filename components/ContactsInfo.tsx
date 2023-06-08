@@ -1,7 +1,12 @@
 import React from 'react';
-import {Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {Image, SafeAreaView, Text, View} from 'react-native';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {styles} from '../styles/contactInfo';
+import {TouchableOpacity} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import IconEntypo from 'react-native-vector-icons/Entypo';
+import {Color} from '../constants/colors';
 
 function ContactsInfo({route, navigation}): JSX.Element {
   const backgroundStyle = {
@@ -19,24 +24,23 @@ function ContactsInfo({route, navigation}): JSX.Element {
         />
         <View>
           <Text style={styles.label}>Name</Text>
-          <Text>{name}</Text>
-          <Text>Phone number</Text>
-          <Text>{phonenumber}</Text>
+          <Text style={styles.info}>{name}</Text>
+          <Text style={styles.label}>Phone number</Text>
+          <Text style={styles.info}>{phonenumber}</Text>
+        </View>
+        <View style={styles.buttonWrapper}>
+          <TouchableOpacity style={styles.button}>
+            <Icon name="call" size={22} color={Color.LIGHT_GREY} />
+            <Text style={styles.buttonText}>CALL</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <IconEntypo name="cross" size={22} color={Color.LIGHT_GREY} />
+            <Text style={styles.buttonText}>DELETE</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
-  image: {width: 120, height: 120, alignSelf: 'center'},
-  contactInfoWrapper: {
-    paddingHorizontal: 10,
-    paddingVertical: 30,
-    gap: 30,
-  },
-  label: {
-    fontSize: 12,
-  },
-});
 export default ContactsInfo;
