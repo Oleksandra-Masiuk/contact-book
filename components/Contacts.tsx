@@ -1,12 +1,21 @@
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, PermissionsAndroid, Alert} from 'react-native';
+import {
+  SafeAreaView,
+  PermissionsAndroid,
+  Alert,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import Contacts from 'react-native-contacts';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+import IconEntypo from 'react-native-vector-icons/Entypo';
 
 import ContactList from './ContactList';
 import SearchInput from './Search';
 import {Contact} from './ContactCard';
 import {mapContactsArray} from '../helpers/mapContactsArray';
+import {Color} from '../constants/colors';
+import {styles} from '../styles/cardList';
 
 function ContactsSection(): JSX.Element {
   const [contacts, setContacts] = useState([] as Contact[]);
@@ -16,10 +25,10 @@ function ContactsSection(): JSX.Element {
     const requestContactPermission = async () => {
       try {
         const granted = await PermissionsAndroid.request(
-          PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
+          PermissionsAndroid.PERMISSIONS.WRITE_CONTACTS,
           {
             title: 'Contacts',
-            message: 'This app would like to view your contacts.',
+            message: 'This app would like to view and edit your contacts.',
             buttonPositive: 'Accept',
           },
         );
@@ -62,75 +71,18 @@ function ContactsSection(): JSX.Element {
     setFilteredContacts(newFilteredContacts);
   };
 
+  const onAddContact = () => {};
+
   return (
     <SafeAreaView style={backgroundStyle}>
       <SearchInput onSearch={onSearch} />
+      <TouchableOpacity style={styles.button} onPress={onAddContact}>
+        <IconEntypo name="plus" size={22} color={Color.SMALL_GREY} />
+        <Text style={styles.buttonText}>ADD</Text>
+      </TouchableOpacity>
       <ContactList data={filteredContacts} />
     </SafeAreaView>
   );
 }
 
 export default ContactsSection;
-const array: Contact[] = [
-  {
-    name: 'Devin',
-    email: 'sasha@gmail.com',
-    phoneNumber: '+380478951258',
-  },
-  {name: 'Dan', email: 'sasha@gmail.com', phoneNumber: '+380478951258'},
-  {
-    name: 'Dominic',
-    email: 'sasha@gmail.com',
-    phoneNumber: '+380478951258',
-  },
-  {
-    name: 'Jackson',
-    email: 'sasha@gmail.com',
-    phoneNumber: '+380478951258',
-  },
-  {
-    name: 'James',
-    email: 'sasha@gmail.com',
-    phoneNumber: '+380478951258',
-  },
-  {
-    name: 'Joel',
-    email: 'sasha@gmail.com',
-    phoneNumber: '+380478951258',
-  },
-  {
-    name: 'John',
-    email: 'sasha@gmail.com',
-    phoneNumber: '+380478951258',
-  },
-  {
-    name: 'Jillian',
-    email: 'sasha@gmail.com',
-    phoneNumber: '+380478951258',
-  },
-  {
-    name: 'Jimmy',
-    email: 'sasha@gmail.com',
-    phoneNumber: '+380478951258',
-  },
-  {
-    name: 'Julie',
-    email: 'sasha@gmail.com',
-    phoneNumber: '+380478951258',
-  },
-  {
-    name: 'Jillian',
-    email: 'sasha@gmail.com',
-    phoneNumber: '+380478951258',
-  },
-  {
-    name: 'Jimmy',
-    email: 'sasha@gmail.com',
-    phoneNumber: '+380478951258',
-  },
-  {
-    name: 'Julie',
-    email: 'sasha@gmail.com',
-    phoneNumber: '+380478951258',
-  },
-];

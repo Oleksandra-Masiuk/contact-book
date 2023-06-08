@@ -11,6 +11,7 @@ export interface Contact {
   email?: string;
   phoneNumber?: string;
   image?: string;
+  id: string;
 }
 
 interface ContactCardProps {

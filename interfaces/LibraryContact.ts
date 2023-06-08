@@ -10,6 +10,7 @@ interface LibraryContact {
     email: string;
   }[];
   thumbnailPath?: string;
+  recordID: string;
 }
 
 export type {LibraryContact};

@@ -13,7 +13,13 @@ const styles = StyleSheet.create({
     fontSize: FontSize.SMALL,
     color: Color.DARK_GREY,
   },
-  info: {fontSize: FontSize.BIG, color: Color.DARK_GREY},
+  info: {
+    fontSize: FontSize.BIG,
+    color: Color.DARK_GREY,
+    borderBottomColor: Color.LIGHT_GREY,
+    borderBottomWidth: 0.5,
+    paddingVertical: 1,
+  },
   buttonText: {
     fontSize: FontSize.MEDIUM,
   },

@@ -7,13 +7,16 @@ import {
   TouchableOpacity,
   Linking,
 } from 'react-native';
+import Contacts from 'react-native-contacts';
+import {RouteProp, NavigationProp} from '@react-navigation/native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {styles} from '../styles/contactInfo';
 import Icon from 'react-native-vector-icons/Ionicons';
 import IconEntypo from 'react-native-vector-icons/Entypo';
+
+import {styles} from '../styles/contactInfo';
 import {Color} from '../constants/colors';
-import {RouteProp, NavigationProp} from '@react-navigation/native';
 import {Contact} from './ContactCard';
+import {getImageObject} from '../helpers/getImageObject';
 
 type RootStackParamList = {
   Contacts: undefined;
@@ -30,16 +33,34 @@ const ContactsInfo: React.FC<ContactsInfoProps> = ({route, navigation}) => {
     backgroundColor: Colors.lighter,
   };
 
-  const {name, phoneNumber, image} = route?.params?.item;
+  const {name, phoneNumber, image, id} = route?.params?.item;
 
   const makePhoneCall = () => {
     Linking.openURL(`tel:${phoneNumber}`);
   };
 
+  const onDelete = () => {
+    const removeContact = async () => {
+      try {
+        const contact = await Contacts.getContactById(id);
+
+        if (contact) {
+          await Contacts.deleteContact(contact);
+          navigation.navigate('Contacts');
+        } else {
+          console.log('Contact not found.');
+        }
+      } catch (error) {
+        console.log('Error while removing contact:', error);
+      }
+    };
+    removeContact();
+  };
+
   return (
     <SafeAreaView style={backgroundStyle}>
       <View style={styles.contactInfoWrapper}>
-        <Image style={styles.image} source={{uri: image}} />
+        <Image style={styles.image} source={getImageObject(image)} />
         <View style={styles.contactInfoRowsWrapper}>
           <View>
             <Text style={styles.label}>Name</Text>
@@ -55,7 +76,7 @@ const ContactsInfo: React.FC<ContactsInfoProps> = ({route, navigation}) => {
             <Icon name="call" size={22} color={Color.SMALL_GREY} />
             <Text style={styles.buttonText}>CALL</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={onDelete}>
             <IconEntypo name="cross" size={22} color={Color.SMALL_GREY} />
             <Text style={styles.buttonText}>DELETE</Text>
           </TouchableOpacity>

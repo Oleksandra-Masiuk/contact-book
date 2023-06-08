@@ -8,11 +8,13 @@ const mapContactsArray = (array: LibraryContact[]): Contact[] =>
       phoneNumbers,
       emailAddresses,
       thumbnailPath,
+      recordID,
     }: LibraryContact) => ({
       name: displayName,
       phoneNumber: phoneNumbers?.[0]?.number,
       email: emailAddresses?.[0]?.email,
       image: thumbnailPath,
+      id: recordID,
     }),
   );
 
