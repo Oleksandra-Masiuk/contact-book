@@ -7,8 +7,20 @@ import {TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import {Color} from '../constants/colors';
+import {RouteProp, NavigationProp} from '@react-navigation/native';
+import {Contact} from './ContactCard';
 
-function ContactsInfo({route, navigation}): JSX.Element {
+type RootStackParamList = {
+  Contacts: undefined;
+  ContactInfo: {item: Contact};
+};
+
+type ContactsInfoProps = {
+  route: RouteProp<RootStackParamList, 'ContactInfo'>;
+  navigation: NavigationProp<RootStackParamList, 'ContactInfo'>;
+};
+
+const ContactsInfo: React.FC<ContactsInfoProps> = ({route, navigation}) => {
   const backgroundStyle = {
     backgroundColor: Colors.lighter,
   };
@@ -30,17 +42,17 @@ function ContactsInfo({route, navigation}): JSX.Element {
         </View>
         <View style={styles.buttonWrapper}>
           <TouchableOpacity style={styles.button}>
-            <Icon name="call" size={22} color={Color.LIGHT_GREY} />
+            <Icon name="call" size={22} color={Color.SMALL_GREY} />
             <Text style={styles.buttonText}>CALL</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
-            <IconEntypo name="cross" size={22} color={Color.LIGHT_GREY} />
+            <IconEntypo name="cross" size={22} color={Color.SMALL_GREY} />
             <Text style={styles.buttonText}>DELETE</Text>
           </TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>
   );
-}
+};
 
 export default ContactsInfo;
