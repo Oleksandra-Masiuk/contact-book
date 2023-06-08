@@ -1,11 +1,11 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import IconInfo from 'react-native-vector-icons/Feather';
+
 import {Color} from '../../constants/colors';
 import {FontSize} from '../../constants/fontSize';
 import {Contact} from '../../interfaces/Contact';
+import {IconInfo, MaterialIcon} from '../../constants/icons';
 
 interface ContactCardProps {
   item: Contact;
@@ -20,7 +20,7 @@ const ContactCard: React.FC<ContactCardProps> = ({item}) => {
         navigation.navigate('ContactInfo', {item});
       }}>
       <View style={styles.cardWrapper}>
-        <Icon
+        <MaterialIcon
           style={styles.icon}
           name="perm-contact-cal"
           size={30}

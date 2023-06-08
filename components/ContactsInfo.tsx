@@ -9,14 +9,13 @@ import {
 } from 'react-native';
 import {RouteProp, NavigationProp} from '@react-navigation/native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import Icon from 'react-native-vector-icons/Ionicons';
-import IconEntypo from 'react-native-vector-icons/Entypo';
 
 import {styles} from '../styles/contactInfo';
 import {Color} from '../constants/colors';
 import {Contact} from '../interfaces/Contact';
 import {getImageObject} from '../helpers/getImageObject';
 import {deleteContactById} from '../services/ContactServise';
+import {IconEntypo, Ionicon} from '../constants/icons';
 
 type RootStackParamList = {
   Contacts: undefined;
@@ -69,7 +68,7 @@ const ContactsInfo: React.FC<ContactsInfoProps> = ({route, navigation}) => {
         </View>
         <View style={styles.buttonWrapper}>
           <TouchableOpacity style={styles.button} onPress={makePhoneCall}>
-            <Icon name="call" size={22} color={Color.SMALL_GREY} />
+            <Ionicon name="call" size={22} color={Color.SMALL_GREY} />
             <Text style={styles.buttonText}>CALL</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={onDelete}>

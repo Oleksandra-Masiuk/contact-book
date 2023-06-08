@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, TextInput, View} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {Ionicon} from '../../constants/icons';
 
 interface SearchInputProps {
   onSearch: (searchText: string) => void;
@@ -16,7 +16,7 @@ const SearchInput: React.FC<SearchInputProps> = ({onSearch}) => {
 
   return (
     <View style={styles?.searchWrapper}>
-      <Icon style={styles.icon} name="search" size={22} />
+      <Ionicon style={styles.icon} name="search" size={22} />
       <TextInput
         style={styles.input}
         placeholder={'Search'}

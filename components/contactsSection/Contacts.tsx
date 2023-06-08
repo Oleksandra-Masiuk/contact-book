@@ -5,8 +5,8 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
-import IconEntypo from 'react-native-vector-icons/Entypo';
 
+import {IconEntypo} from '../../constants/icons';
 import ContactList from './ContactList';
 import SearchInput from './Search';
 import {Contact} from '../../interfaces/Contact';
@@ -18,10 +18,12 @@ import {
   requestContactPermission,
 } from '../../services/ContactServise';
 import {backgroundStyles} from '../../styles/contacts';
+import {AddContactsModal} from '../addContacts/AddContactsModal';
 
 function ContactsSection(): JSX.Element {
   const [contacts, setContacts] = useState([] as Contact[]);
   const [filteredContacts, setFilteredContacts] = useState([] as Contact[]);
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     const loadContacts = async () => {
@@ -50,10 +52,14 @@ function ContactsSection(): JSX.Element {
     setFilteredContacts(newFilteredContacts);
   };
 
-  const onAddContact = () => {};
+  const onAddContact = () => setModalVisible(!modalVisible);
 
   return (
     <SafeAreaView style={backgroundStyles.wrapper}>
+      <AddContactsModal
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+      />
       <SearchInput onSearch={onSearch} />
       <TouchableOpacity style={styles.button} onPress={onAddContact}>
         <IconEntypo name="plus" size={22} color={Color.SMALL_GREY} />
