@@ -9,15 +9,15 @@ import IconEntypo from 'react-native-vector-icons/Entypo';
 
 import ContactList from './ContactList';
 import SearchInput from './Search';
-import {Contact} from '../interfaces/Contact';
-import {Color} from '../constants/colors';
-import {styles} from '../styles/cardList';
+import {Contact} from '../../interfaces/Contact';
+import {Color} from '../../constants/colors';
+import {styles} from '../../styles/cardList';
 import {
   alertPermissionDenied,
   getContacts,
   requestContactPermission,
-} from '../services/ContactServise';
-import {backgroundStyles} from '../styles/contacts';
+} from '../../services/ContactServise';
+import {backgroundStyles} from '../../styles/contacts';
 
 function ContactsSection(): JSX.Element {
   const [contacts, setContacts] = useState([] as Contact[]);

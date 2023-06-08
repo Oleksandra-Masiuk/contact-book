@@ -3,9 +3,9 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import IconInfo from 'react-native-vector-icons/Feather';
-import {Color} from '../constants/colors';
-import {FontSize} from '../constants/fontSize';
-import {Contact} from '../interfaces/Contact';
+import {Color} from '../../constants/colors';
+import {FontSize} from '../../constants/fontSize';
+import {Contact} from '../../interfaces/Contact';
 
 interface ContactCardProps {
   item: Contact;
