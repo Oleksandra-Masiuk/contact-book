@@ -2,67 +2,46 @@ import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   PermissionsAndroid,
-  Alert,
   Text,
   TouchableOpacity,
 } from 'react-native';
-import Contacts from 'react-native-contacts';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 
 import ContactList from './ContactList';
 import SearchInput from './Search';
-import {Contact} from './ContactCard';
-import {mapContactsArray} from '../helpers/mapContactsArray';
+import {Contact} from '../interfaces/Contact';
 import {Color} from '../constants/colors';
 import {styles} from '../styles/cardList';
+import {
+  alertPermissionDenied,
+  getContacts,
+  requestContactPermission,
+} from '../services/ContactServise';
+import {backgroundStyles} from '../styles/contacts';
 
 function ContactsSection(): JSX.Element {
   const [contacts, setContacts] = useState([] as Contact[]);
   const [filteredContacts, setFilteredContacts] = useState([] as Contact[]);
 
   useEffect(() => {
-    const requestContactPermission = async () => {
+    const loadContacts = async () => {
       try {
-        const granted = await PermissionsAndroid.request(
-          PermissionsAndroid.PERMISSIONS.WRITE_CONTACTS,
-          {
-            title: 'Contacts',
-            message: 'This app would like to view and edit your contacts.',
-            buttonPositive: 'Accept',
-          },
-        );
+        const granted = await requestContactPermission();
 
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-          const data = await Contacts.getAll();
-          const mappedData = mapContactsArray(data);
-          setContacts(mappedData);
-          setFilteredContacts(mappedData);
+          const data = await getContacts();
+          setContacts(data);
+          setFilteredContacts(data);
         } else {
-          Alert.alert(
-            'Permission Denied',
-            'This app requires access to your contacts. Please grant permission in the app settings.',
-            [
-              {
-                text: 'OK',
-              },
-            ],
-          );
+          alertPermissionDenied();
         }
       } catch (error) {
         console.error('Permission error: ', error);
       }
     };
 
-    requestContactPermission();
+    loadContacts();
   }, []);
-
-  const backgroundStyle = {
-    backgroundColor: Colors.lighter,
-    gap: 40,
-    paddingHorizontal: 10,
-    paddingVertical: 30,
-  };
 
   const onSearch = (searchText: string) => {
     const newFilteredContacts = contacts.filter(({name}) =>
@@ -74,7 +53,7 @@ function ContactsSection(): JSX.Element {
   const onAddContact = () => {};
 
   return (
-    <SafeAreaView style={backgroundStyle}>
+    <SafeAreaView style={backgroundStyles.wrapper}>
       <SearchInput onSearch={onSearch} />
       <TouchableOpacity style={styles.button} onPress={onAddContact}>
         <IconEntypo name="plus" size={22} color={Color.SMALL_GREY} />

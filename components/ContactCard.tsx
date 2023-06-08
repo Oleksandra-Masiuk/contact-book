@@ -5,14 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import IconInfo from 'react-native-vector-icons/Feather';
 import {Color} from '../constants/colors';
 import {FontSize} from '../constants/fontSize';
-
-export interface Contact {
-  name: string;
-  email?: string;
-  phoneNumber?: string;
-  image?: string;
-  id: string;
-}
+import {Contact} from '../interfaces/Contact';
 
 interface ContactCardProps {
   item: Contact;

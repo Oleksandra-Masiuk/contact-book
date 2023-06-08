@@ -1,4 +1,4 @@
-import {Contact} from '../components/ContactCard';
+import {Contact} from '../interfaces/Contact';
 import {LibraryContact} from '../interfaces/LibraryContact';
 
 const mapContactsArray = (array: LibraryContact[]): Contact[] =>

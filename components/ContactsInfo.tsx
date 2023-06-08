@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   Linking,
 } from 'react-native';
-import Contacts from 'react-native-contacts';
 import {RouteProp, NavigationProp} from '@react-navigation/native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -15,18 +14,19 @@ import IconEntypo from 'react-native-vector-icons/Entypo';
 
 import {styles} from '../styles/contactInfo';
 import {Color} from '../constants/colors';
-import {Contact} from './ContactCard';
+import {Contact} from '../interfaces/Contact';
 import {getImageObject} from '../helpers/getImageObject';
+import {deleteContactById} from '../services/ContactServise';
 
 type RootStackParamList = {
   Contacts: undefined;
   ContactInfo: {item: Contact};
 };
 
-type ContactsInfoProps = {
+interface ContactsInfoProps {
   route: RouteProp<RootStackParamList, 'ContactInfo'>;
   navigation: NavigationProp<RootStackParamList, 'ContactInfo'>;
-};
+}
 
 const ContactsInfo: React.FC<ContactsInfoProps> = ({route, navigation}) => {
   const backgroundStyle = {
@@ -42,13 +42,9 @@ const ContactsInfo: React.FC<ContactsInfoProps> = ({route, navigation}) => {
   const onDelete = () => {
     const removeContact = async () => {
       try {
-        const contact = await Contacts.getContactById(id);
-
+        const contact = await deleteContactById(id);
         if (contact) {
-          await Contacts.deleteContact(contact);
           navigation.navigate('Contacts');
-        } else {
-          console.log('Contact not found.');
         }
       } catch (error) {
         console.log('Error while removing contact:', error);
