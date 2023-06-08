@@ -1,9 +1,14 @@
 import React from 'react';
-import {Image, SafeAreaView, Text, View} from 'react-native';
-
+import {
+  Image,
+  SafeAreaView,
+  Text,
+  View,
+  TouchableOpacity,
+  Linking,
+} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {styles} from '../styles/contactInfo';
-import {TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import {Color} from '../constants/colors';
@@ -27,18 +32,26 @@ const ContactsInfo: React.FC<ContactsInfoProps> = ({route, navigation}) => {
 
   const {name, phoneNumber, image} = route?.params?.item;
 
+  const makePhoneCall = () => {
+    Linking.openURL(`tel:${phoneNumber}`);
+  };
+
   return (
     <SafeAreaView style={backgroundStyle}>
       <View style={styles.contactInfoWrapper}>
         <Image style={styles.image} source={{uri: image}} />
-        <View>
-          <Text style={styles.label}>Name</Text>
-          <Text style={styles.info}>{name}</Text>
-          <Text style={styles.label}>Phone number</Text>
-          <Text style={styles.info}>{phoneNumber}</Text>
+        <View style={styles.contactInfoRowsWrapper}>
+          <View>
+            <Text style={styles.label}>Name</Text>
+            <Text style={styles.info}>{name}</Text>
+          </View>
+          <View>
+            <Text style={styles.label}>Phone number</Text>
+            <Text style={styles.info}>{phoneNumber}</Text>
+          </View>
         </View>
         <View style={styles.buttonWrapper}>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={makePhoneCall}>
             <Icon name="call" size={22} color={Color.SMALL_GREY} />
             <Text style={styles.buttonText}>CALL</Text>
           </TouchableOpacity>

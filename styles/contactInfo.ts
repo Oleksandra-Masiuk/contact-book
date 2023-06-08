@@ -23,12 +23,16 @@ const styles = StyleSheet.create({
     width: 130,
     flexDirection: 'row',
     justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: 50,
     gap: 6,
   },
   buttonWrapper: {
     justifyContent: 'space-evenly',
     flexDirection: 'row',
+  },
+  contactInfoRowsWrapper: {
+    gap: 10,
   },
 });
 
