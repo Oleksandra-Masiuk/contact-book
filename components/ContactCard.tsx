@@ -9,7 +9,8 @@ import {FontSize} from '../constants/fontSize';
 export interface Contact {
   name: string;
   email?: string;
-  phonenumber?: string;
+  phoneNumber?: string;
+  image?: string;
 }
 
 interface ContactCardProps {

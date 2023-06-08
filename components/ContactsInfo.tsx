@@ -25,20 +25,17 @@ const ContactsInfo: React.FC<ContactsInfoProps> = ({route, navigation}) => {
     backgroundColor: Colors.lighter,
   };
 
-  const {name, phonenumber, image} = route?.params?.item;
+  const {name, phoneNumber, image} = route?.params?.item;
 
   return (
     <SafeAreaView style={backgroundStyle}>
       <View style={styles.contactInfoWrapper}>
-        <Image
-          style={styles.image}
-          source={require('../assets/user-profile.png')}
-        />
+        <Image style={styles.image} source={{uri: image}} />
         <View>
           <Text style={styles.label}>Name</Text>
           <Text style={styles.info}>{name}</Text>
           <Text style={styles.label}>Phone number</Text>
-          <Text style={styles.info}>{phonenumber}</Text>
+          <Text style={styles.info}>{phoneNumber}</Text>
         </View>
         <View style={styles.buttonWrapper}>
           <TouchableOpacity style={styles.button}>
