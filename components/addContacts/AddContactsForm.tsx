@@ -6,15 +6,15 @@ import {styles as contactInfoStyles} from '../../styles/contactInfo';
 import {styles} from '../../styles/addForm';
 import {validationSchema} from '../../constants/validationSchemas';
 import {ContactsForm} from '../../interfaces/ContactsForm';
-import {useDispatch} from 'react-redux';
 import {contactActionCreator} from '../../store/actions';
+import {useAppDispatch} from '../../hooks/appUseDispatch';
 
 interface AddContactsFormProps {
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const AddContactsForm: React.FC<AddContactsFormProps> = ({setModalVisible}) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const saveContact = async (data: ContactsForm) => {
     try {
       dispatch(contactActionCreator.createContact(data));

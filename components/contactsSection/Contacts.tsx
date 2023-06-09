@@ -5,8 +5,6 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
-
 import {IconEntypo} from '../../constants/icons';
 import ContactList from './ContactList';
 import SearchInput from './Search';
@@ -20,13 +18,15 @@ import {
 import {backgroundStyles} from '../../styles/contacts';
 import {AddContactsModal} from '../addContacts/AddContactsModal';
 import {contactActionCreator} from '../../store/actions';
+import {useAppSelector} from '../../hooks/appUseSelector';
+import {useAppDispatch} from '../../hooks/appUseDispatch';
 
 function ContactsSection(): JSX.Element {
   const [filteredContacts, setFilteredContacts] = useState([] as Contact[]);
   const [modalVisible, setModalVisible] = useState(false);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const {contacts} = useSelector(state => ({
+  const {contacts} = useAppSelector(state => ({
     contacts: state.contacts.contacts,
   }));
 

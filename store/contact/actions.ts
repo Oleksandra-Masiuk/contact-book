@@ -7,6 +7,7 @@ import {
 import {ContactsForm} from '../../interfaces/ContactsForm';
 import {mapContactsArray} from '../../helpers/mapContactsArray';
 import {LibraryContact} from '../../interfaces/LibraryContact';
+import {AppDispatch} from '../store';
 
 enum ActionType {
   LOAD_CONTACTS = 'contact/load-contact',
@@ -31,17 +32,17 @@ const addContact = createAction(ActionType.ADD_CONTACT, contact => ({
   },
 }));
 
-const loadContacts = () => async dispatch => {
+const loadContacts = () => async (dispatch: AppDispatch) => {
   const contacts = await getContacts();
   dispatch(setContacts(contacts));
 };
 
-const deleteContact = (id: string) => async dispatch => {
+const deleteContact = (id: string) => async (dispatch: AppDispatch) => {
   await deleteContactById(id);
   dispatch(removeContact(id));
 };
 
-const createContact = (data: ContactsForm) => async dispatch => {
+const createContact = (data: ContactsForm) => async (dispatch: AppDispatch) => {
   const contact: LibraryContact = await addServiseContact(data);
   dispatch(addContact(mapContactsArray([contact])[0]));
 };
