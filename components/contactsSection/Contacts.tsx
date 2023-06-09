@@ -18,7 +18,7 @@ import {contactActionCreator} from '../../store/actions';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {IconEntypo} from '../../constants/icons';
 import {Color} from '../../constants/colors';
-import {backgroundStyles} from '../../styles/contacts';
+import {styles as backgroundStyles} from '../../styles/contacts';
 import {styles} from '../../styles/cardList';
 
 function ContactsSection(): JSX.Element {
