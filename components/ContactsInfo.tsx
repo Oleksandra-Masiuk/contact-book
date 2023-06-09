@@ -19,7 +19,7 @@ import {Contact} from '../interfaces/Contact';
 import {getImageObject} from '../helpers/getImageObject';
 import {IconEntypo, Ionicon} from '../constants/icons';
 import {contactActionCreator} from '../store/actions';
-import {useAppDispatch} from '../hooks/appUseDispatch';
+import {useAppDispatch} from '../hooks';
 
 export type RootStackParamList = {
   Contacts: undefined;

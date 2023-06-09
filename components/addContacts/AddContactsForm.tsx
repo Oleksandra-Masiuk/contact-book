@@ -7,7 +7,7 @@ import {styles} from '../../styles/addForm';
 import {validationSchema} from '../../constants/validationSchemas';
 import {ContactsForm} from '../../interfaces/ContactsForm';
 import {contactActionCreator} from '../../store/actions';
-import {useAppDispatch} from '../../hooks/appUseDispatch';
+import {useAppDispatch} from '../../hooks';
 
 interface AddContactsFormProps {
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
