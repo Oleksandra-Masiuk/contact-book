@@ -6,7 +6,6 @@ import {
 } from '../../services/ContactServise';
 import {ContactsForm} from '../../interfaces/ContactsForm';
 import {mapContactsArray} from '../../helpers/mapContactsArray';
-import {Contact} from 'react-native-contacts';
 import {LibraryContact} from '../../interfaces/LibraryContact';
 
 enum ActionType {

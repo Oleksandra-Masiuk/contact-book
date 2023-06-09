@@ -1,6 +1,7 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import 'react-native-gesture-handler';
 
 import ContactsInfo, {RootStackParamList} from './components/ContactsInfo';
 import ContactsSection from './components/contactsSection/Contacts';

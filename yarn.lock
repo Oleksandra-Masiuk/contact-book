@@ -6096,7 +6096,7 @@
   "resolved" "https://registry.npmjs.org/react-native-contacts/-/react-native-contacts-7.0.5.tgz"
   "version" "7.0.5"
 
-"react-native-gesture-handler@>= 1.0.0":
+"react-native-gesture-handler@^2.11.0", "react-native-gesture-handler@>= 1.0.0":
   "integrity" "sha512-qiGS2HFnuxxA067kcC4PHfp5hzB8pn6K9UqI5kdkM48DLkzv3vUJptdPlffRSvUJggsfwIyAMYVM+xM4sxg2/A=="
   "resolved" "https://registry.npmjs.org/react-native-gesture-handler/-/react-native-gesture-handler-2.11.0.tgz"
   "version" "2.11.0"

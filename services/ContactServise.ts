@@ -2,7 +2,6 @@ import {Alert, PermissionsAndroid} from 'react-native';
 import Contacts from 'react-native-contacts';
 import {mapContactsArray} from '../helpers/mapContactsArray';
 import {ContactsForm} from '../interfaces/ContactsForm';
-import {LibraryContact} from '../interfaces/LibraryContact';
 
 const requestContactPermission = async () =>
   await PermissionsAndroid.request(
@@ -18,20 +17,15 @@ const getContacts = async () => {
   const data = await Contacts.getAll();
   return mapContactsArray(data);
 };
-const addContact = async ({
-  phone,
-  name,
-  email,
-}: ContactsForm): Promise<LibraryContact> => {
+const addContact = async ({phone, name, email}: ContactsForm) => {
   const newContact = {
     givenName: name,
     phoneNumbers: [{label: 'mobile', number: phone}],
     emailAddresses: [{label: 'work', email: email}],
   };
 
-  return (await Contacts.addContact(
-    newContact as Contacts.Contact,
-  )) as LibraryContact;
+  const contact = await Contacts.addContact(newContact as Contacts.Contact);
+  return Object(contact);
 };
 
 const deleteContactById = async (id: string) => {
