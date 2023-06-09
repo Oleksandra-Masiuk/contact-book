@@ -1,6 +1,7 @@
 import {Alert, PermissionsAndroid} from 'react-native';
 import Contacts from 'react-native-contacts';
 import {mapContactsArray} from '../helpers/mapContactsArray';
+import {ContactsForm} from '../interfaces/ContactsForm';
 
 const requestContactPermission = async () =>
   await PermissionsAndroid.request(
@@ -15,6 +16,15 @@ const requestContactPermission = async () =>
 const getContacts = async () => {
   const data = await Contacts.getAll();
   return mapContactsArray(data);
+};
+const addContact = async ({phone, name, email}: ContactsForm) => {
+  const newContact = {
+    givenName: name,
+    phoneNumbers: [{label: 'mobile', number: phone}],
+    emailAddresses: [{label: 'work', email: email}],
+  };
+
+  return await Contacts.addContact(newContact as Contacts.Contact);
 };
 
 const deleteContactById = async (id: string) => {
@@ -43,4 +53,5 @@ export {
   getContacts,
   alertPermissionDenied,
   deleteContactById,
+  addContact,
 };

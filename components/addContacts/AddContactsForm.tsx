@@ -1,51 +1,21 @@
 import React from 'react';
-import {View, TextInput, Text} from 'react-native';
-import Contacts from 'react-native-contacts';
+import {View, TextInput, Text, TouchableOpacity} from 'react-native';
 import {Formik} from 'formik';
-import * as yup from 'yup';
 
 import {styles as contactInfoStyles} from '../../styles/contactInfo';
-import {TouchableOpacity} from 'react-native';
 import {styles} from '../../styles/addForm';
-
-const phoneRegExp =
-  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
-
-const validationSchema = yup.object().shape({
-  email: yup
-    .string()
-    .email('Please enter valid email')
-    .required('Email Address is Required'),
-  name: yup
-    .string()
-    .min(8, ({min}) => `Name must be at least ${min} characters`)
-    .required('Name is required'),
-  phone: yup
-    .string()
-    .matches(phoneRegExp, 'Phone number is not valid')
-    .required('Phone number is required'),
-});
+import {validationSchema} from '../../constants/validationSchemas';
+import {addContact} from '../../services/ContactServise';
+import {ContactsForm} from '../../interfaces/ContactsForm';
 
 interface AddContactsFormProps {
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-interface ContactsForm {
-  phone: string;
-  name: string;
-  email: string;
-}
-
 const AddContactsForm: React.FC<AddContactsFormProps> = ({setModalVisible}) => {
-  const saveContact = async ({phone, name, email}: ContactsForm) => {
+  const saveContact = async (data: ContactsForm) => {
     try {
-      const newContact = {
-        givenName: name,
-        phoneNumbers: [{label: 'mobile', number: phone}],
-        emailAddresses: [{label: 'work', email: email}],
-      };
-
-      await Contacts.addContact(newContact as Contacts.Contact);
+      await addContact(data);
       setModalVisible(false);
     } catch (error) {
       console.log('Error while saving contact:', error);
