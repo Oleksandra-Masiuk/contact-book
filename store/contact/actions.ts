@@ -1,5 +1,5 @@
 import {createAction} from '@reduxjs/toolkit';
-import {getContacts} from '../../services/ContactServise';
+import {deleteContactById, getContacts} from '../../services/ContactServise';
 
 enum ActionType {
   LOAD_CONTACTS = 'contact/load-contact',
@@ -9,6 +9,12 @@ enum ActionType {
 const setContacts = createAction(ActionType.LOAD_CONTACTS, contacts => ({
   payload: {
     contacts,
+  },
+}));
+
+const removeContact = createAction(ActionType.DELETE_CONTACT, id => ({
+  payload: {
+    id,
   },
 }));
 
@@ -23,10 +29,9 @@ const addContact = createAction(ActionType.ADD_CONTACT, contact => ({
   },
 }));
 
-const deleteContact = createAction(ActionType.DELETE_CONTACT, id => ({
-  payload: {
-    id,
-  },
-}));
+const deleteContact = (id: string) => async dispatch => {
+  await deleteContactById(id);
+  dispatch(removeContact(id));
+};
 
-export {loadContacts, setContacts, addContact, deleteContact};
+export {loadContacts, setContacts, addContact, deleteContact, removeContact};

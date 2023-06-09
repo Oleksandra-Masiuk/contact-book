@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {setContacts, addContact, deleteContact} from './actions';
+import {setContacts, addContact, removeContact} from './actions';
 import {Contact} from '../../interfaces/Contact';
 
 export interface InitialState {
@@ -21,7 +21,7 @@ const reducer = createReducer(initialState, builder => {
 
     state.contacts = [contact, ...state.contacts];
   });
-  builder.addCase(deleteContact, (state, action) => {
+  builder.addCase(removeContact, (state, action) => {
     const {id} = action.payload;
 
     state.contacts = state.contacts.filter(contact => contact.id !== id);

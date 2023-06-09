@@ -16,6 +16,8 @@ import {Contact} from '../interfaces/Contact';
 import {getImageObject} from '../helpers/getImageObject';
 import {deleteContactById} from '../services/ContactServise';
 import {IconEntypo, Ionicon} from '../constants/icons';
+import {useDispatch} from 'react-redux';
+import {contactActionCreator} from '../store/actions';
 
 type RootStackParamList = {
   Contacts: undefined;
@@ -28,6 +30,7 @@ interface ContactsInfoProps {
 }
 
 const ContactsInfo: React.FC<ContactsInfoProps> = ({route, navigation}) => {
+  const dispatch = useDispatch();
   const backgroundStyle = {
     backgroundColor: Colors.lighter,
   };
@@ -41,10 +44,8 @@ const ContactsInfo: React.FC<ContactsInfoProps> = ({route, navigation}) => {
   const onDelete = () => {
     const removeContact = async () => {
       try {
-        const contact = await deleteContactById(id);
-        if (contact) {
-          navigation.navigate('Contacts');
-        }
+        dispatch(contactActionCreator.deleteContact(id));
+        navigation.navigate('Contacts');
       } catch (error) {
         console.log('Error while removing contact:', error);
       }
