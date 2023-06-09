@@ -5,17 +5,19 @@ import {Formik} from 'formik';
 import {styles as contactInfoStyles} from '../../styles/contactInfo';
 import {styles} from '../../styles/addForm';
 import {validationSchema} from '../../constants/validationSchemas';
-import {addContact} from '../../services/ContactServise';
 import {ContactsForm} from '../../interfaces/ContactsForm';
+import {useDispatch} from 'react-redux';
+import {contactActionCreator} from '../../store/actions';
 
 interface AddContactsFormProps {
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const AddContactsForm: React.FC<AddContactsFormProps> = ({setModalVisible}) => {
+  const dispatch = useDispatch();
   const saveContact = async (data: ContactsForm) => {
     try {
-      await addContact(data);
+      dispatch(contactActionCreator.createContact(data));
       setModalVisible(false);
     } catch (error) {
       console.log('Error while saving contact:', error);

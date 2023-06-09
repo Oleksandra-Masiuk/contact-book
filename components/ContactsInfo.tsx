@@ -14,7 +14,6 @@ import {styles} from '../styles/contactInfo';
 import {Color} from '../constants/colors';
 import {Contact} from '../interfaces/Contact';
 import {getImageObject} from '../helpers/getImageObject';
-import {deleteContactById} from '../services/ContactServise';
 import {IconEntypo, Ionicon} from '../constants/icons';
 import {useDispatch} from 'react-redux';
 import {contactActionCreator} from '../store/actions';

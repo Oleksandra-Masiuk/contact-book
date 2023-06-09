@@ -1,5 +1,13 @@
 import {createAction} from '@reduxjs/toolkit';
-import {deleteContactById, getContacts} from '../../services/ContactServise';
+import {
+  deleteContactById,
+  getContacts,
+  addContact as addServiseContact,
+} from '../../services/ContactServise';
+import {ContactsForm} from '../../interfaces/ContactsForm';
+import {mapContactsArray} from '../../helpers/mapContactsArray';
+import {Contact} from 'react-native-contacts';
+import {LibraryContact} from '../../interfaces/LibraryContact';
 
 enum ActionType {
   LOAD_CONTACTS = 'contact/load-contact',
@@ -18,20 +26,32 @@ const removeContact = createAction(ActionType.DELETE_CONTACT, id => ({
   },
 }));
 
-const loadContacts = () => async dispatch => {
-  const contacts = await getContacts();
-  dispatch(setContacts(contacts));
-};
-
 const addContact = createAction(ActionType.ADD_CONTACT, contact => ({
   payload: {
     contact,
   },
 }));
 
+const loadContacts = () => async dispatch => {
+  const contacts = await getContacts();
+  dispatch(setContacts(contacts));
+};
+
 const deleteContact = (id: string) => async dispatch => {
   await deleteContactById(id);
   dispatch(removeContact(id));
 };
 
-export {loadContacts, setContacts, addContact, deleteContact, removeContact};
+const createContact = (data: ContactsForm) => async dispatch => {
+  const contact: LibraryContact = await addServiseContact(data);
+  dispatch(addContact(mapContactsArray([contact])[0]));
+};
+
+export {
+  loadContacts,
+  deleteContact,
+  createContact,
+  setContacts,
+  addContact,
+  removeContact,
+};
