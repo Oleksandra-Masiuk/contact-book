@@ -7,9 +7,7 @@ import {
   TouchableOpacity,
   Linking,
 } from 'react-native';
-
 import {RouteProp, useRoute} from '@react-navigation/native';
-
 import {StackScreenProps} from '@react-navigation/stack';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';

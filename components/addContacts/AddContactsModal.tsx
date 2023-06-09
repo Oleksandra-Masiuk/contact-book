@@ -1,11 +1,11 @@
 import React from 'react';
 import {Modal, View, TouchableOpacity} from 'react-native';
 
-import {IconEntypo} from '../../constants/icons';
-import {styles as contactInfoStyles} from '../../styles/contactInfo';
-import {Color} from '../../constants/colors';
-import {styles} from '../../styles/contactModal';
 import {AddContactsForm} from './AddContactsForm';
+import {IconEntypo} from '../../constants/icons';
+import {Color} from '../../constants/colors';
+import {styles as contactInfoStyles} from '../../styles/contactInfo';
+import {styles} from '../../styles/contactModal';
 
 interface AddContactsModalProps {
   modalVisible: boolean;

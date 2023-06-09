@@ -1,8 +1,9 @@
 import React from 'react';
 import {FlatList, Text, View} from 'react-native';
+
 import ContactCard from './ContactCard';
-import {styles} from '../../styles/cardList';
 import {Contact} from '../../interfaces/Contact';
+import {styles} from '../../styles/cardList';
 
 interface ContactListProps {
   data: Contact[];

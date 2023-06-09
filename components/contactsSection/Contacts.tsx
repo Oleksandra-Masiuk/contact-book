@@ -5,20 +5,21 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
-import {IconEntypo} from '../../constants/icons';
+
 import ContactList from './ContactList';
 import SearchInput from './Search';
 import {Contact} from '../../interfaces/Contact';
-import {Color} from '../../constants/colors';
-import {styles} from '../../styles/cardList';
+import {AddContactsModal} from '../addContacts/AddContactsModal';
 import {
   alertPermissionDenied,
   requestContactPermission,
 } from '../../services/ContactServise';
-import {backgroundStyles} from '../../styles/contacts';
-import {AddContactsModal} from '../addContacts/AddContactsModal';
 import {contactActionCreator} from '../../store/actions';
 import {useAppDispatch, useAppSelector} from '../../hooks';
+import {IconEntypo} from '../../constants/icons';
+import {Color} from '../../constants/colors';
+import {backgroundStyles} from '../../styles/contacts';
+import {styles} from '../../styles/cardList';
 
 function ContactsSection(): JSX.Element {
   const [filteredContacts, setFilteredContacts] = useState([] as Contact[]);

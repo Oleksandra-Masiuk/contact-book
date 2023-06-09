@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
-import {StyleSheet, TextInput, View} from 'react-native';
+import {TextInput, View} from 'react-native';
+
 import {Ionicon} from '../../constants/icons';
+import {styles} from '../../styles/Search';
 
 interface SearchInputProps {
   onSearch: (searchText: string) => void;
@@ -26,27 +28,5 @@ const SearchInput: React.FC<SearchInputProps> = ({onSearch}) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  searchWrapper: {
-    position: 'relative',
-    height: 40,
-  },
-  icon: {
-    position: 'absolute',
-    top: 8,
-    left: 8,
-    color: '#444547',
-  },
-  input: {
-    flex: 1,
-    borderColor: '#444547',
-    borderWidth: 2,
-    padding: 10,
-    paddingLeft: 30,
-    borderRadius: 50,
-    fontSize: 18,
-  },
-});
 
 export default SearchInput;

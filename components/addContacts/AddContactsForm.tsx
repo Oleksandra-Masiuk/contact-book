@@ -3,11 +3,11 @@ import {View, TextInput, Text, TouchableOpacity} from 'react-native';
 import {Formik} from 'formik';
 
 import {styles as contactInfoStyles} from '../../styles/contactInfo';
-import {styles} from '../../styles/addForm';
 import {validationSchema} from '../../constants/validationSchemas';
 import {ContactsForm} from '../../interfaces/ContactsForm';
 import {contactActionCreator} from '../../store/actions';
 import {useAppDispatch} from '../../hooks';
+import {styles} from '../../styles/addForm';
 
 interface AddContactsFormProps {
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
