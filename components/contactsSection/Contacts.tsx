@@ -5,6 +5,7 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 
 import {IconEntypo} from '../../constants/icons';
 import ContactList from './ContactList';
@@ -14,16 +15,20 @@ import {Color} from '../../constants/colors';
 import {styles} from '../../styles/cardList';
 import {
   alertPermissionDenied,
-  getContacts,
   requestContactPermission,
 } from '../../services/ContactServise';
 import {backgroundStyles} from '../../styles/contacts';
 import {AddContactsModal} from '../addContacts/AddContactsModal';
+import {contactActionCreator} from '../../store/actions';
 
 function ContactsSection(): JSX.Element {
-  const [contacts, setContacts] = useState([] as Contact[]);
   const [filteredContacts, setFilteredContacts] = useState([] as Contact[]);
   const [modalVisible, setModalVisible] = useState(false);
+  const dispatch = useDispatch();
+
+  const {contacts} = useSelector(state => ({
+    contacts: state.contacts.contacts,
+  }));
 
   useEffect(() => {
     const loadContacts = async () => {
@@ -31,9 +36,7 @@ function ContactsSection(): JSX.Element {
         const granted = await requestContactPermission();
 
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-          const data = await getContacts();
-          setContacts(data);
-          setFilteredContacts(data);
+          dispatch(contactActionCreator.loadContacts());
         } else {
           alertPermissionDenied();
         }
@@ -43,10 +46,14 @@ function ContactsSection(): JSX.Element {
     };
 
     loadContacts();
-  }, []);
+  }, [dispatch]);
+
+  useEffect(() => {
+    setFilteredContacts(contacts);
+  }, [contacts]);
 
   const onSearch = (searchText: string) => {
-    const newFilteredContacts = contacts.filter(({name}) =>
+    const newFilteredContacts = contacts.filter(({name}: {name: string}) =>
       name.toLowerCase().includes(searchText.toLowerCase()),
     );
     setFilteredContacts(newFilteredContacts);
