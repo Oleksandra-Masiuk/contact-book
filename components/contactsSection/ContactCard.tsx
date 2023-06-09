@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 import {Color} from '../../constants/colors';
 import {FontSize} from '../../constants/fontSize';
@@ -10,10 +11,15 @@ import {IconInfo, MaterialIcon} from '../../constants/icons';
 interface ContactCardProps {
   item: Contact;
 }
+type ContactsStackParamList = {
+  Contacts: undefined;
+  ContactInfo: {item: Contact};
+};
 
 const ContactCard: React.FC<ContactCardProps> = ({item}) => {
   const {name, email} = item;
-  const navigation = useNavigation();
+  const navigation =
+    useNavigation<StackNavigationProp<ContactsStackParamList, 'Contacts'>>();
   return (
     <TouchableOpacity
       onPress={() => {
