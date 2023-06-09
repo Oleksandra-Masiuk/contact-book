@@ -1,13 +1,13 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createStackNavigator} from '@react-navigation/stack';
 
-import ContactsInfo from './components/ContactsInfo';
+import ContactsInfo, {RootStackParamList} from './components/ContactsInfo';
 import ContactsSection from './components/contactsSection/Contacts';
 import {Provider} from 'react-redux';
 import store from './store/store';
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator<RootStackParamList>();
 
 function App(): JSX.Element {
   return (
