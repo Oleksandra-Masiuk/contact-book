@@ -1,5 +1,5 @@
 import React from 'react';
-import {Modal, View, Text, TouchableOpacity} from 'react-native';
+import {Modal, View, TouchableOpacity} from 'react-native';
 
 import {IconEntypo} from '../../constants/icons';
 import {styles as contactInfoStyles} from '../../styles/contactInfo';
@@ -9,7 +9,7 @@ import {AddContactsForm} from './AddContactsForm';
 
 interface AddContactsModalProps {
   modalVisible: boolean;
-  setModalVisible: any;
+  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const AddContactsModal: React.FC<AddContactsModalProps> = ({
@@ -28,7 +28,7 @@ const AddContactsModal: React.FC<AddContactsModalProps> = ({
           onPress={onClose}>
           <IconEntypo name="cross" size={22} color={Color.SMALL_GREY} />
         </TouchableOpacity>
-        <AddContactsForm />
+        <AddContactsForm setModalVisible={setModalVisible} />
       </View>
     </Modal>
   );

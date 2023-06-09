@@ -1,60 +1,114 @@
-import React, {useState} from 'react';
-import {View, TextInput, Button, Image} from 'react-native';
+import React from 'react';
+import {View, TextInput, Text} from 'react-native';
 import Contacts from 'react-native-contacts';
-import {launchImageLibrary} from 'react-native-image-picker';
+import {Formik} from 'formik';
+import * as yup from 'yup';
 
-const AddContactsForm: React.FC = () => {
-  const [name, setName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [email, setEmail] = useState('');
-  const [image, setImage] = useState<string | undefined>();
+import {styles as contactInfoStyles} from '../../styles/contactInfo';
+import {TouchableOpacity} from 'react-native';
+import {styles} from '../../styles/addForm';
 
-  const handleImagePicker = async () => {
-    await launchImageLibrary({mediaType: 'photo'}, response => {
-      if (!response.didCancel) {
-        setImage(response.assets?.[0]?.uri);
-      }
-    });
-  };
+const phoneRegExp =
+  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
-  const saveContact = async () => {
+const validationSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email('Please enter valid email')
+    .required('Email Address is Required'),
+  name: yup
+    .string()
+    .min(8, ({min}) => `Name must be at least ${min} characters`)
+    .required('Name is required'),
+  phone: yup
+    .string()
+    .matches(phoneRegExp, 'Phone number is not valid')
+    .required('Phone number is required'),
+});
+
+interface AddContactsFormProps {
+  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+interface ContactsForm {
+  phone: string;
+  name: string;
+  email: string;
+}
+
+const AddContactsForm: React.FC<AddContactsFormProps> = ({setModalVisible}) => {
+  const saveContact = async ({phone, name, email}: ContactsForm) => {
     try {
       const newContact = {
-        displayName: name,
-        phoneNumbers: [{label: 'mobile', number: phoneNumber}],
+        givenName: name,
+        phoneNumbers: [{label: 'mobile', number: phone}],
         emailAddresses: [{label: 'work', email: email}],
-        thumbnailPath: image ? image : undefined,
       };
-      console.log(newContact);
 
       await Contacts.addContact(newContact as Contacts.Contact);
+      setModalVisible(false);
     } catch (error) {
       console.log('Error while saving contact:', error);
     }
   };
 
   return (
-    <View>
-      <TextInput
-        placeholder="Name"
-        value={name}
-        onChangeText={text => setName(text)}
-      />
-      <TextInput
-        placeholder="Phone Number"
-        value={phoneNumber}
-        onChangeText={text => setPhoneNumber(text)}
-      />
-      <TextInput
-        placeholder="Email"
-        value={email}
-        onChangeText={text => setEmail(text)}
-      />
-      <Button title="Add Image" onPress={handleImagePicker} />
-      {image && (
-        <Image source={{uri: image}} style={{width: 100, height: 100}} />
-      )}
-      <Button title="Save Contact" onPress={saveContact} />
+    <View style={styles.contactFormWrapper}>
+      <Formik
+        initialValues={{email: '', name: '', phone: ''}}
+        validationSchema={validationSchema}
+        onSubmit={saveContact}>
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          values,
+          errors,
+          isValid,
+        }) => (
+          <>
+            <View>
+              <TextInput
+                placeholder="Name"
+                style={styles.input}
+                onChangeText={handleChange('name')}
+                onBlur={handleBlur('name')}
+                value={values.name}
+              />
+
+              {errors.name && <Text style={styles.error}>{errors.name}</Text>}
+            </View>
+            <View>
+              <TextInput
+                placeholder="Email Address"
+                style={styles.input}
+                onChangeText={handleChange('email')}
+                onBlur={handleBlur('email')}
+                value={values.email}
+                keyboardType="email-address"
+              />
+              {errors.email && <Text style={styles.error}>{errors.email}</Text>}
+            </View>
+            <View>
+              <TextInput
+                placeholder="Phone number"
+                style={styles.input}
+                onChangeText={handleChange('phone')}
+                onBlur={handleBlur('phone')}
+                value={values.phone}
+              />
+
+              {errors.phone && <Text style={styles.error}>{errors.phone}</Text>}
+            </View>
+            <TouchableOpacity
+              disabled={!isValid}
+              style={[contactInfoStyles.button, styles.button]}
+              onPress={handleSubmit}>
+              <Text style={contactInfoStyles.buttonText}>SAVE</Text>
+            </TouchableOpacity>
+          </>
+        )}
+      </Formik>
     </View>
   );
 };
