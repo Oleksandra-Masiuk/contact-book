@@ -5,6 +5,7 @@ import {FontSize} from '../../../constants/fontSize';
 const styles = StyleSheet.create({
   cardList: {
     gap: 20,
+    flex: 1,
   },
   divider: {height: 15},
   buttonText: {

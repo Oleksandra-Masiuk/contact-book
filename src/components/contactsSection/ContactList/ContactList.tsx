@@ -17,15 +17,13 @@ const ContactList: React.FC<ContactListProps> = ({data}) => {
   return (
     <>
       {data?.length > 0 ? (
-        <View>
-          <FlatList
-            style={styles.cardList}
-            data={data}
-            renderItem={({item}) => <ContactCard item={item} />}
-            keyExtractor={item => item.id}
-            ItemSeparatorComponent={Divider}
-          />
-        </View>
+        <FlatList
+          style={styles.cardList}
+          data={data}
+          renderItem={({item}) => <ContactCard item={item} />}
+          keyExtractor={item => item.id}
+          ItemSeparatorComponent={Divider}
+        />
       ) : (
         <View>
           <Text style={styles?.noContactsText}>No contacts found</Text>

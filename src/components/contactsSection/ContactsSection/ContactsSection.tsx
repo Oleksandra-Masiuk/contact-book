@@ -18,8 +18,8 @@ import {contactActionCreator} from '../../../store/actions';
 import {useAppDispatch, useAppSelector} from '../../../hooks';
 import {IconEntypo} from '../../../constants/icons';
 import {Color} from '../../../constants/colors';
-import {styles as backgroundStyles} from './styles';
 import {styles} from '../ContactList/styles';
+import {styles as backgroundStyles} from './styles';
 
 function ContactsSection(): JSX.Element {
   const [filteredContacts, setFilteredContacts] = useState([] as Contact[]);
