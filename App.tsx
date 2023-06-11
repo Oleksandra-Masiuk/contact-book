@@ -4,7 +4,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import 'react-native-gesture-handler';
 
 import ContactsInfo, {RootStackParamList} from './components/ContactsInfo';
-import ContactsSection from './components/contactsSection/Contacts';
+import ContactsSection from './components/contactsSection/ContactsSection';
 import {Provider} from 'react-redux';
 import store from './store/store';
 
