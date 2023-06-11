@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import {phoneRegExp} from './regrex';
+import {phoneRegExp} from '../constants/regrex';
 
 const validationSchema = yup.object().shape({
   email: yup
