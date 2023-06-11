@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {TextInput, View} from 'react-native';
 
-import {Ionicon} from '../../constants/icons';
-import {styles} from '../../styles/search';
+import {Ionicon} from '../../../constants/icons';
+import {styles} from './styles';
 
 interface SearchInputProps {
   onSearch: (searchText: string) => void;

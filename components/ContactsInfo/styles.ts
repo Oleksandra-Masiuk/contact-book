@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
-import {Color} from '../constants/colors';
-import {FontSize} from '../constants/fontSize';
+import {Color} from '../../constants/colors';
+import {FontSize} from '../../constants/fontSize';
 
 const styles = StyleSheet.create({
   image: {width: 120, height: 120, alignSelf: 'center'},

@@ -3,10 +3,10 @@ import {Text, TouchableOpacity, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 
-import {Color} from '../../constants/colors';
-import {Contact} from '../../interfaces/Contact';
-import {IconInfo, MaterialIcon} from '../../constants/icons';
-import {styles} from '../../styles/contactCard';
+import {Color} from '../../../constants/colors';
+import {Contact} from '../../../interfaces/Contact';
+import {IconInfo, MaterialIcon} from '../../../constants/icons';
+import {styles} from './styles';
 
 interface ContactCardProps {
   item: Contact;

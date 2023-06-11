@@ -11,13 +11,13 @@ import {RouteProp, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {styles} from '../styles/contactInfo';
-import {Color} from '../constants/colors';
-import {Contact} from '../interfaces/Contact';
-import {getImageObject} from '../helpers/getImageObject';
-import {IconEntypo, Ionicon} from '../constants/icons';
-import {contactActionCreator} from '../store/actions';
-import {useAppDispatch} from '../hooks';
+import {styles} from './styles';
+import {Color} from '../../constants/colors';
+import {Contact} from '../../interfaces/Contact';
+import {getImageObject} from '../../helpers/getImageObject';
+import {IconEntypo, Ionicon} from '../../constants/icons';
+import {contactActionCreator} from '../../store/actions';
+import {useAppDispatch} from '../../hooks';
 
 export type RootStackParamList = {
   Contacts: undefined;

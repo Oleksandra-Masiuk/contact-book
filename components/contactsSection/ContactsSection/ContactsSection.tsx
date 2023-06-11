@@ -6,20 +6,20 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import ContactList from './ContactList';
-import SearchInput from './Search';
-import {Contact} from '../../interfaces/Contact';
-import {AddContactsModal} from '../addContacts/AddContactsModal';
+import ContactList from '../ContactList/ContactList';
+import SearchInput from '../Search/Search';
+import {Contact} from '../../../interfaces/Contact';
+import {AddContactsModal} from '../../addContacts/AddContactsModal/AddContactsModal';
 import {
   alertPermissionDenied,
   requestContactPermission,
-} from '../../services/ContactServise';
-import {contactActionCreator} from '../../store/actions';
-import {useAppDispatch, useAppSelector} from '../../hooks';
-import {IconEntypo} from '../../constants/icons';
-import {Color} from '../../constants/colors';
-import {styles as backgroundStyles} from '../../styles/contacts';
-import {styles} from '../../styles/cardList';
+} from '../../../services/ContactServise';
+import {contactActionCreator} from '../../../store/actions';
+import {useAppDispatch, useAppSelector} from '../../../hooks';
+import {IconEntypo} from '../../../constants/icons';
+import {Color} from '../../../constants/colors';
+import {styles as backgroundStyles} from './styles';
+import {styles} from '../ContactList/styles';
 
 function ContactsSection(): JSX.Element {
   const [filteredContacts, setFilteredContacts] = useState([] as Contact[]);

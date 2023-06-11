@@ -3,8 +3,10 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import 'react-native-gesture-handler';
 
-import ContactsInfo, {RootStackParamList} from './components/ContactsInfo';
-import ContactsSection from './components/contactsSection/ContactsSection';
+import ContactsInfo, {
+  RootStackParamList,
+} from './components/ContactsInfo/ContactsInfo';
+import ContactsSection from './components/contactsSection/ContactsSection/ContactsSection';
 import {Provider} from 'react-redux';
 import store from './store/store';
 
