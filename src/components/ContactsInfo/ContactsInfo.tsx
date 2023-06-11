@@ -11,13 +11,14 @@ import {RouteProp, useRoute} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {styles} from './styles';
-import {Color} from '../../constants/colors';
 import {Contact} from '../../interfaces/Contact';
 import {getImageObject} from '../../helpers/getImageObject';
 import {IconEntypo, Ionicon} from '../../constants/icons';
 import {contactActionCreator} from '../../store/actions';
 import {useAppDispatch} from '../../hooks';
+import {ScreenName} from '../../enums/navigation/screens';
+import {Color} from '../../constants/colors';
+import {styles} from './styles';
 
 export type RootStackParamList = {
   Contacts: undefined;
@@ -28,7 +29,8 @@ const ContactsInfo: React.FC<StackScreenProps<RootStackParamList>> = ({
   navigation,
 }) => {
   const dispatch = useAppDispatch();
-  const route = useRoute<RouteProp<RootStackParamList, 'ContactInfo'>>();
+  const route =
+    useRoute<RouteProp<RootStackParamList, ScreenName.CONTACT_INFO>>();
   const backgroundStyle = {
     backgroundColor: Colors.lighter,
   };
@@ -43,7 +45,7 @@ const ContactsInfo: React.FC<StackScreenProps<RootStackParamList>> = ({
     const removeContact = async () => {
       try {
         dispatch(contactActionCreator.deleteContact(item?.id));
-        navigation.navigate('Contacts');
+        navigation.navigate(ScreenName.CONTACTS);
       } catch (error) {
         console.log('Error while removing contact:', error);
       }

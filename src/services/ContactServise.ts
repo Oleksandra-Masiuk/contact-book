@@ -1,13 +1,15 @@
 import {Alert, PermissionsAndroid} from 'react-native';
 import Contacts from 'react-native-contacts';
+
 import {mapContactsArray} from '../helpers/mapContactsArray';
 import {ContactsForm} from '../interfaces/ContactsForm';
+import {ScreenName} from '../enums/navigation/screens';
 
 const requestContactPermission = async () =>
   await PermissionsAndroid.request(
     PermissionsAndroid.PERMISSIONS.WRITE_CONTACTS,
     {
-      title: 'Contacts',
+      title: ScreenName.CONTACTS,
       message: 'This app would like to view and edit your contacts.',
       buttonPositive: 'Accept',
     },

@@ -6,6 +6,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {Color} from '../../../constants/colors';
 import {Contact} from '../../../interfaces/Contact';
 import {IconInfo, MaterialIcon} from '../../../constants/icons';
+import {ScreenName} from '../../../enums/navigation/screens';
 import {styles} from './styles';
 
 interface ContactCardProps {
@@ -20,11 +21,13 @@ type ContactsStackParamList = {
 const ContactCard: React.FC<ContactCardProps> = ({item}) => {
   const {name, email} = item;
   const navigation =
-    useNavigation<StackNavigationProp<ContactsStackParamList, 'Contacts'>>();
+    useNavigation<
+      StackNavigationProp<ContactsStackParamList, ScreenName.CONTACTS>
+    >();
   return (
     <TouchableOpacity
       onPress={() => {
-        navigation.navigate('ContactInfo', {item});
+        navigation.navigate(ScreenName.CONTACT_INFO, {item});
       }}>
       <View style={styles.cardWrapper}>
         <MaterialIcon
