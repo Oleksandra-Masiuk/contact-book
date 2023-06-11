@@ -22,6 +22,7 @@ const ContactList: React.FC<ContactListProps> = ({data}) => {
             style={styles.cardList}
             data={data}
             renderItem={({item}) => <ContactCard item={item} />}
+            keyExtractor={item => item.id}
             ItemSeparatorComponent={Divider}
           />
         </View>
