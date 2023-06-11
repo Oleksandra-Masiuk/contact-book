@@ -35,7 +35,7 @@ const ContactCard: React.FC<ContactCardProps> = ({item}) => {
         />
         <View style={styles.textWrapper}>
           <Text style={styles.name}>{name}</Text>
-          {email && <Text style={styles.email}>{email}</Text>}
+          {Boolean(email) && <Text style={styles.email}>{email}</Text>}
         </View>
         <IconInfo name="info" size={16} color={Color.SMALL_GREY} />
       </View>

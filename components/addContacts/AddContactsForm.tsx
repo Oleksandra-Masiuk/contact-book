@@ -3,7 +3,7 @@ import {View, TextInput, Text, TouchableOpacity} from 'react-native';
 import {Formik} from 'formik';
 
 import {styles as contactInfoStyles} from '../../styles/contactInfo';
-import {validationSchema} from '../../constants/validationSchemas';
+import {validationSchema} from '../../validation-schemas/validationSchemas';
 import {ContactsForm} from '../../interfaces/ContactsForm';
 import {contactActionCreator} from '../../store/actions';
 import {useAppDispatch} from '../../hooks';
@@ -48,7 +48,9 @@ const AddContactsForm: React.FC<AddContactsFormProps> = ({setModalVisible}) => {
                 value={values.name}
               />
 
-              {errors.name && <Text style={styles.error}>{errors.name}</Text>}
+              {Boolean(errors.name) && (
+                <Text style={styles.error}>{errors.name}</Text>
+              )}
             </View>
             <View>
               <TextInput
@@ -59,7 +61,9 @@ const AddContactsForm: React.FC<AddContactsFormProps> = ({setModalVisible}) => {
                 value={values.email}
                 keyboardType="email-address"
               />
-              {errors.email && <Text style={styles.error}>{errors.email}</Text>}
+              {Boolean(errors.email) && (
+                <Text style={styles.error}>{errors.email}</Text>
+              )}
             </View>
             <View>
               <TextInput
@@ -70,7 +74,9 @@ const AddContactsForm: React.FC<AddContactsFormProps> = ({setModalVisible}) => {
                 value={values.phone}
               />
 
-              {errors.phone && <Text style={styles.error}>{errors.phone}</Text>}
+              {Boolean(errors.phone) && (
+                <Text style={styles.error}>{errors.phone}</Text>
+              )}
             </View>
             <TouchableOpacity
               disabled={!isValid}
