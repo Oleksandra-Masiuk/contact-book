@@ -2,6 +2,7 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import 'react-native-gesture-handler';
+import Toast from 'react-native-toast-message';
 
 import ContactsInfo, {
   RootStackParamList,
@@ -25,6 +26,7 @@ function App(): JSX.Element {
           options={{headerTitle: ''}}
         />
       </Stack.Navigator>
+      <Toast />
     </NavigationContainer>
   );
 }

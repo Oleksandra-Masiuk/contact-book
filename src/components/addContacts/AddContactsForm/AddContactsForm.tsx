@@ -8,6 +8,7 @@ import {ContactsForm} from '../../../interfaces/ContactsForm';
 import {contactActionCreator} from '../../../store/actions';
 import {useAppDispatch} from '../../../hooks';
 import {styles} from './styles';
+import {ToastText, successToast} from '../../../services/ToastServise';
 
 interface AddContactsFormProps {
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
@@ -19,6 +20,7 @@ const AddContactsForm: React.FC<AddContactsFormProps> = ({setModalVisible}) => {
     try {
       dispatch(contactActionCreator.createContact(data));
       setModalVisible(false);
+      successToast(ToastText.ADD_SUCCESS);
     } catch (error) {
       console.log('Error while saving contact:', error);
     }

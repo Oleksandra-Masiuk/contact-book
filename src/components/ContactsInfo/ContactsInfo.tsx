@@ -16,6 +16,7 @@ import {getImageObject} from '../../helpers/getImageObject';
 import {IconEntypo, Ionicon} from '../../constants/icons';
 import {contactActionCreator} from '../../store/actions';
 import {useAppDispatch} from '../../hooks';
+import {ToastText, successToast} from '../../services/ToastServise';
 import {ScreenName} from '../../enums/navigation/screens';
 import {Color} from '../../constants/colors';
 import {styles} from './styles';
@@ -46,6 +47,7 @@ const ContactsInfo: React.FC<StackScreenProps<RootStackParamList>> = ({
       try {
         dispatch(contactActionCreator.deleteContact(item?.id));
         navigation.navigate(ScreenName.CONTACTS);
+        successToast(ToastText.DELETE_SUCCESS);
       } catch (error) {
         console.log('Error while removing contact:', error);
       }
